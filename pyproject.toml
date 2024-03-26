@@ -16,9 +16,10 @@ sqlalchemy = ">=2.0.0,<2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
-mypy = "^1.9.0"
-black = "^24.3.0"
-ruff = "^0.3.4"
+mypy = "1.9.0"
+black = "24.3.0"
+ruff = "0.3.4"
+coverage = { extras = ["toml"], version = ">=6.2,<8.0" }
 
 [build-system]
 requires = ["poetry-core"]
@@ -26,7 +27,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.coverage.run]
 parallel = true
-source = ["docs_src", "tests", "sqlmodel"]
+source = ["tests", "sqlalchemy_repository"]
 context = '${CONTEXT}'
 
 [tool.coverage.report]
@@ -44,6 +45,11 @@ target-version = ['py38', 'py39', 'py310', 'py311']
 [tool.mypy]
 python_version = "3.8"
 strict = true
+plugins = ["sqlalchemy.ext.mypy.plugin"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
 
 [tool.ruff.lint]
 select = [
