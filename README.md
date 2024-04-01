@@ -24,6 +24,73 @@ $ pip install sqlalchemy-repository
 Successfully installed sqlalchemy-repository
 ```
 
+## Usage
+
+Here's a quick example. ✨
+
+### A SQL Table
+
+Imagine you have a SQL table called `hero` with:
+
+- `id`
+- `name`
+- `secret_name`
+- `age`
+
+### Create a SQLAlchemy model
+
+```python
+from typing import Optional
+
+from sqlalchemy import Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy_repository import Entity
+
+class Hero(Entity):
+    __tablename__ = "heroes"
+
+    id: Mapped[Optional[int]] = mapped_column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(255))
+    secret_name: Mapped[str] = mapped_column(String(255))
+    age: Mapped[Optional[int]] = mapped_column(Integer, nullable=True, default=None)
+```
+
+The class `Hero` is a **SQLAlchemy** model. It is a subclass of `Entity` from **sqlalchemy-repository**, which is a subclass of `SQLAlchemy`'s `DeclarativeBase` class.
+
+And each of those class attributes is a **SQLAlchemy** column.
+
+### Create a SQLAlchemy session
+
+```python
+from sqlalchemy_repository import DatabaseManager
+
+db = DatabaseManager("sqlite:///heroes.db")
+```
+
+The `DatabaseManager` class is a class that manages the session through the `session_ctx` method.
+
+### Create a repository
+
+```python
+from sqlalchemy_repository import SQLAlchemyRepository
+
+class HeroRepository(SQLAlchemyRepository[Hero, int]):
+    entity_class = Hero
+
+hero_repository = HeroRepository()
+```
+
+### Use the repository
+
+```python
+with db.session_ctx():
+    hero = Hero(name="Deadpond", secret_name="Dive Wilson")
+
+    hero_repository.save(hero)
+
+    heroes = hero_repository.find_all()
+```
+
 ## License
 
 This project is licensed under the terms of the [MIT license](https://github.com/javalce/sqlalchemy-repository/blob/main/LICENSE).
