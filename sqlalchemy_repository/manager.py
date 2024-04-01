@@ -4,7 +4,7 @@ from typing import Any, Dict, Iterator, Optional
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
-from .session import get_session, reset_session, set_session
+from .session import reset_session, set_session
 
 
 class DatabaseManager:
@@ -28,15 +28,6 @@ class DatabaseManager:
 
         self.engine = create_engine(db_url, **engine_args)
         self.session_factory: sessionmaker[Session] = sessionmaker(bind=self.engine, **session_args)
-
-    @property
-    def session(self) -> Session:
-        """
-        Get a session object.
-
-        :return: A SQLAlchemy session object.
-        """
-        return get_session()
 
     @contextmanager
     def session_ctx(self) -> Iterator[Session]:

@@ -6,16 +6,6 @@ from sqlalchemy.orm import Session
 from sqlalchemy_repository import DatabaseManager
 
 
-def test_session():
-    db = DatabaseManager("sqlite:///:memory:")
-
-    with pytest.raises(RuntimeError):
-        assert db.session is None
-
-    with db.session_ctx():
-        assert isinstance(db.session, Session)
-
-
 def test_session_ctx():
     db = DatabaseManager("sqlite:///:memory:")
     with db.session_ctx() as session:
