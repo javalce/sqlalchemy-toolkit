@@ -4,6 +4,7 @@ from starlette.responses import Response
 from starlette.types import ASGIApp
 
 from ...manager import DatabaseManager
+from ...session import reset_session, set_session
 
 
 class SQLAlchemyMiddleware(BaseHTTPMiddleware):
@@ -33,6 +34,13 @@ class SQLAlchemyMiddleware(BaseHTTPMiddleware):
         :param call_next: The next middleware or application to call.
         :return: The response.
         """
-        with self.db.session_ctx():
+
+        response = Response("Internal server error", status_code=500)
+        try:
+            session = self.db.session_factory()
+            token = set_session(session)
             response = await call_next(request)
+        finally:
+            session.close()
+            reset_session(token)
         return response
