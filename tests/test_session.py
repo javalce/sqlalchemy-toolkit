@@ -1,7 +1,7 @@
 import pytest
 from sqlalchemy.orm import Session
 
-from sqlalchemy_repository.session import _session, get_session
+from sqlalchemy_toolkit.session import _session, get_session
 
 
 def test_get_session():

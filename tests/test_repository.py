@@ -2,7 +2,7 @@ import pytest
 from sqlalchemy import Integer
 from sqlalchemy.orm import Mapped, clear_mappers, mapped_column
 
-from sqlalchemy_repository import DatabaseManager, Entity, SQLAlchemyRepository
+from sqlalchemy_toolkit import DatabaseManager, Entity, SQLAlchemyRepository
 
 
 @pytest.fixture

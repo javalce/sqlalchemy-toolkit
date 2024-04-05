@@ -3,7 +3,7 @@ from sqlalchemy import text
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import Session
 
-from sqlalchemy_repository import DatabaseManager
+from sqlalchemy_toolkit import DatabaseManager
 
 
 def test_session_ctx():

@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "sqlalchemy-repository"
+name = "sqlalchemy-toolkit"
 version = "0.1.0"
-description = "Repository pattern implementation for SQLAlchemy 1.0+."
+description = "Simplify SQLAlchemy 2.0+ usage."
 authors = ["Javier Valero Cejudo <javalce29@gmail.com>"]
 readme = "README.md"
-repository = "https://github.com/javalce/sqlalchemy-repository"
-homepage = "https://github.com/javalce/sqlalchemy-repository"
+repository = "https://github.com/javalce/sqlalchemy-toolkit"
+homepage = "https://github.com/javalce/sqlalchemy-toolkit"
 license = "MIT"
-keywords = ["sqlalchemy", "repository"]
+keywords = ["sqlalchemy"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

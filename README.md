@@ -1,11 +1,11 @@
-# SQLAlchemy Repository
+# SQLAlchemy Toolkit
 
 This project is a library that simplifies the use of SQLAlchemy in Python applications. It also provides a implementation of the repository pattern for SQLAlchemy.
 
 It has a FastAPI integration through a middleware that manages the session and transaction for each request.
 
-![PyPI](https://img.shields.io/pypi/v/sqlalchemy-repository.svg)
-![Supported Python versions](https://img.shields.io/pypi/pyversions/sqlalchemy-repository.svg)
+![PyPI](https://img.shields.io/pypi/v/sqlalchemy-toolkit.svg)
+![Supported Python versions](https://img.shields.io/pypi/pyversions/sqlalchemy-toolkit.svg)
 
 ## Features
 
@@ -19,9 +19,9 @@ Here's what sqlalchemy-repository can do for you. 🚀
 ## Installation
 
 ```console
-$ pip install sqlalchemy-repository
+$ pip install sqlalchemy-toolkit
 ---> 100%
-Successfully installed sqlalchemy-repository
+Successfully installed sqlalchemy-toolkit
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ from typing import Optional
 
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy_repository import Entity
+from sqlalchemy_toolkit import Entity
 
 class Hero(Entity):
     __tablename__ = "heroes"
@@ -62,7 +62,7 @@ And each of those class attributes is a **SQLAlchemy** column.
 ### Create a SQLAlchemy session
 
 ```python
-from sqlalchemy_repository import DatabaseManager
+from sqlalchemy_toolkit import DatabaseManager
 
 db = DatabaseManager("sqlite:///heroes.db")
 ```
@@ -72,7 +72,7 @@ The `DatabaseManager` class is a class that manages the session through the `ses
 ### Create a repository
 
 ```python
-from sqlalchemy_repository import SQLAlchemyRepository
+from sqlalchemy_toolkit import SQLAlchemyRepository
 
 class HeroRepository(SQLAlchemyRepository[Hero, int]):
     entity_class = Hero

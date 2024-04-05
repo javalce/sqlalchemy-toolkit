@@ -2,8 +2,8 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from sqlalchemy_repository import DatabaseManager
-from sqlalchemy_repository.ext.fastapi import SQLAlchemyMiddleware
+from sqlalchemy_toolkit import DatabaseManager
+from sqlalchemy_toolkit.ext.fastapi import SQLAlchemyMiddleware
 
 
 @pytest.fixture
