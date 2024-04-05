@@ -167,4 +167,4 @@ def find_all_heroes(hero_repository: Annotated[HeroRepository, Depends()]) -> An
 
 ## License
 
-This project is licensed under the terms of the [MIT license](https://github.com/javalce/sqlalchemy-toolkit/blob/main/LICENSE).
+This project is licensed under the terms of the [MIT license](https://github.com/javalce/sqlalchemy-toolkit/blob/master/LICENSE).
