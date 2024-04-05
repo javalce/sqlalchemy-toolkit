@@ -46,10 +46,13 @@ from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy_toolkit import Entity
 
+
 class Hero(Entity):
     __tablename__ = "heroes"
 
-    id: Mapped[Optional[int]] = mapped_column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    id: Mapped[Optional[int]] = mapped_column(
+        Integer, primary_key=True, nullable=False, autoincrement=True
+    )
     name: Mapped[str] = mapped_column(String(255))
     secret_name: Mapped[str] = mapped_column(String(255))
     age: Mapped[Optional[int]] = mapped_column(Integer, nullable=True, default=None)
@@ -91,6 +94,77 @@ with db.session_ctx():
     heroes = hero_repository.find_all()
 ```
 
+## FastAPI integration
+
+Here's a quick example using the previous hero model. ✨
+
+### Without using the repository
+
+```python
+from typing import Any, List, Optional
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+from sqlalchemy import select
+from sqlalchemy_toolkit import DatabaseManager
+from sqlalchemy_toolkit.ext.fastapi import SQLAlchemyMiddleware
+
+from .models import Hero
+
+
+class HeroDto(BaseModel):
+    id: Optional[int]
+    name: str
+    secret_name: str
+    age: int
+
+
+app = FastAPI()
+
+db = DatabaseManager("sqlite:///heroes.db")
+
+app.add_middleware(SQLAlchemyMiddleware, db=db)
+
+
+@app.get("/heroes", response_model=List[HeroDto])
+def find_all_heroes() -> Any:
+    stm = select(Hero)
+    return db.session.scalars(stm).all()
+```
+
+### Using the repository
+
+```python
+from typing import Any, List, Optional
+
+from fastapi import Depends, FastAPI
+from pydantic import BaseModel
+from sqlalchemy_toolkit import DatabaseManager
+from sqlalchemy_toolkit.ext.fastapi import SQLAlchemyMiddleware
+from typing_extensions import Annotated
+
+from .repository.hero_repository import HeroRepository
+
+
+class HeroDto(BaseModel):
+    id: Optional[int]
+    name: str
+    secret_name: str
+    age: int
+
+
+app = FastAPI()
+
+db = DatabaseManager("sqlite:///heroes.db")
+
+app.add_middleware(SQLAlchemyMiddleware, db=db)
+
+
+@app.get("/heroes", response_model=List[HeroDto])
+def find_all_heroes(hero_repository: Annotated[HeroRepository, Depends()]) -> Any:
+    return hero_repository.find_all()
+```
+
 ## License
 
-This project is licensed under the terms of the [MIT license](https://github.com/javalce/sqlalchemy-repository/blob/main/LICENSE).
+This project is licensed under the terms of the [MIT license](https://github.com/javalce/sqlalchemy-toolkit/blob/main/LICENSE).
