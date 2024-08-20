@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sqlalchemy-toolkit"
-version = "0.1.0"
+version = "0.1.1"
 description = "Simplify SQLAlchemy 2.0+ usage."
 authors = ["Javier Valero Cejudo <javalce29@gmail.com>"]
 readme = "README.md"
@@ -41,7 +41,7 @@ exclude_lines = [
 
 [tool.black]
 line-length = 100
-target-version = ['py38', 'py39', 'py310', 'py311']
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
 
 [tool.mypy]
 python_version = "3.8"
