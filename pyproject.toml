@@ -15,11 +15,11 @@ sqlalchemy = ">=2.0.0,<2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
-mypy = "^1.12.1"
+mypy = "^1.13.0"
 black = "^24.10.0"
-ruff = "^0.7.0"
+ruff = "^0.8.0"
 coverage = { extras = ["toml"], version = ">=6.2,<8.0" }
-fastapi = { extras = ["standard"], version = "^0.115.2" }
+fastapi = { extras = ["standard"], version = "^0.115.5" }
 
 
 [build-system]
