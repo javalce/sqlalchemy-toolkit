@@ -1,17 +1,20 @@
-[tool.poetry]
+[project]
 name = "sqlalchemy-toolkit"
 version = "0.1.1"
 description = "Simplify SQLAlchemy 2.0+ usage."
-authors = ["Javier Valero Cejudo <javalce29@gmail.com>"]
+authors = [{ name = "Javier Valero Cejudo", email = "javalce29@gmail.com" }]
 readme = "README.md"
-repository = "https://github.com/javalce/sqlalchemy-toolkit"
-homepage = "https://github.com/javalce/sqlalchemy-toolkit"
 license = "MIT"
 keywords = ["sqlalchemy"]
+requires-python = ">=3.9"
+dependencies = ["sqlalchemy (>=2.0.0,<3.0.0)"]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-sqlalchemy = ">=2.0.0,<2.1.0"
+[project.urls]
+Homepage = "https://github.com/javalce/sqlalchemy-toolkit"
+Repository = "https://github.com/javalce/sqlalchemy-toolkit"
+
+[tool.poetry]
+requires-poetry = ">=2.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
@@ -23,7 +26,7 @@ fastapi = { extras = ["standard"], version = "^0.115.6" }
 
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.coverage.run]
